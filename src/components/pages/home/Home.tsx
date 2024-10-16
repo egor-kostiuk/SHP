@@ -8,7 +8,6 @@ export const Home: FC = () => {
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(true);
 
-
   // Promise 
   /*
   useEffect(() => {
@@ -19,13 +18,13 @@ export const Home: FC = () => {
   }, []);
   */
 
-  useEffect (() => {
+  useEffect(() => {
     const fetch = async () => {
       try {
         const { products } = await ProductService.getProducts();
         setProducts(products);
       }
-      catch (error:any){
+      catch(error: any) {
         setError(error);
       }
       finally {
@@ -38,15 +37,16 @@ export const Home: FC = () => {
 
   return (
     <div className={styles.bg}>
-      {error && <div className='text-red-500'>{error}</div> }
-      { isLoading 
-      ? <div>Loading...</div> 
-      : products.length ? products.map(product => ( 
-        <div key={products.id}>
-          {/* @ts-ignore */}
-          {product.title}
-        </div>
-      )) : <div>Products not found!</div> }
+      {error && <div className='text-red-500 bg-black'>Error</div>}
+      {isLoading 
+      ? <div className='text-green-400 bg-black'>Loading...</div> 
+      : products.length ? products.map(product => (
+          <div>
+            {/* @ts-ignore */}
+            {product.title}
+          </div>)) 
+        : <div>Products not Found!</div>
+      } 
     </div>
   )
 }
