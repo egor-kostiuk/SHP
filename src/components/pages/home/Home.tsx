@@ -4,12 +4,12 @@ import { ProductService } from '../../../services/product.service';
 import styles from './Home.module.scss';
 
 export const Home: FC = () => {
-  const [products, setProducts] = useState([]);
-  const [error, setError] = useState('');
-  const [isLoading, setLoading] = useState(true);
+	const [products, setProducts] = useState([]);
+	const [error, setError] = useState('');
+	const [isLoading, setLoading] = useState(true);
 
-  // Promise 
-  /*
+	// Promise
+	/*
   useEffect(() => {
     ProductService.getProducts()
     .then(data => setProducts(data.products))
@@ -18,35 +18,36 @@ export const Home: FC = () => {
   }, []);
   */
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const { products } = await ProductService.getProducts();
-        setProducts(products);
-      }
-      catch(error: any) {
-        setError(error);
-      }
-      finally {
-        setLoading(false);
-      }
-    }
+	useEffect(() => {
+		const fetch = async () => {
+			try {
+				const { products } = await ProductService.getProducts();
+				setProducts(products);
+			} catch (error: any) {
+				setError(error);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-    fetch();
-  }, []);
+		fetch();
+	}, []);
 
-  return (
-    <div className={styles.bg}>
-      {error && <div className='text-red-500 bg-black'>Error</div>}
-      {isLoading 
-      ? <div className='text-green-400 bg-black'>Loading...</div> 
-      : products.length ? products.map(product => (
-          <div>
-            {/* @ts-ignore */}
-            {product.title}
-          </div>)) 
-        : <div>Products not Found!</div>
-      } 
-    </div>
-  )
-}
+	return (
+		<div className={styles.bg}>
+			{error && <div className="text-red-500 bg-black">Error</div>}
+			{isLoading ? (
+				<div className="text-green-400 bg-black">Loading...</div>
+			) : products.length ? (
+				products.map(product => (
+					<div>
+						{/* @ts-ignore */}
+						{product.title}
+					</div>
+				))
+			) : (
+				<div>Products not Found!</div>
+			)}
+		</div>
+	);
+};
