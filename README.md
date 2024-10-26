@@ -1,1 +1,7 @@
-# React + TypeScript + Vite
+## Stack
+- react
+- vite
+- ts
+- axios
+- react query
+- tailwind
