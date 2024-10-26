@@ -1,5 +1,3 @@
-# just a practise
-
 ## Stack
 - react
 - vite
