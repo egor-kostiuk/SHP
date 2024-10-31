@@ -5,3 +5,7 @@
 body {
   @apply text-base;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
