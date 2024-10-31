@@ -1,7 +1,10 @@
-import { FC } from "react";
+import { FC } from 'react'
+import { Layout } from '../../ui/layout/Layout'
 
 export const Cart: FC = () => {
-  return (
-    <div></div>
-  )
+	return (
+		<Layout title={'Cart'}>
+			<div></div>
+		</Layout>
+	)
 }
