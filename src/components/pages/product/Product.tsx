@@ -4,23 +4,35 @@ import { useQuery } from '@tanstack/react-query'
 import { ProductService } from '../../../services/product.service'
 import { useParams } from 'react-router-dom'
 
+import { Button } from '../../ui/button/Button'
+import { Gallery } from './gallery/Gallery'
+
 export const Product: FC = () => {
 	const params = useParams()
 
 	const {
 		data: product,
-		error,
 		isLoading,
 	} = useQuery({
 		queryKey: ['product', params.id],
 		queryFn: () => ProductService.getProductById(params.id || ''),
 	})
 
+	if (!product) {
+		return (
+			<Layout>
+				<div>Product not found</div>
+			</Layout>
+		)
+	}
+
 	return (
 		<Layout>
 			{isLoading && <div>Loading...</div>}
 
-			{<div>{product?.title}</div>}
+			<Gallery images={product.images}/>
+
+			<Button>Add to cart</Button>
 		</Layout>
 	)
 }
